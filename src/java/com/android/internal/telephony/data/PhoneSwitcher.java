@@ -622,6 +622,7 @@ public class PhoneSwitcher extends Handler {
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_IA)
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_MMTEL)
                 .addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_RESTRICTED)
+                .addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VCN_MANAGED)
                 .addEnterpriseId(NetworkCapabilities.NET_ENTERPRISE_ID_1)
                 .addEnterpriseId(NetworkCapabilities.NET_ENTERPRISE_ID_2)
                 .addEnterpriseId(NetworkCapabilities.NET_ENTERPRISE_ID_3)
