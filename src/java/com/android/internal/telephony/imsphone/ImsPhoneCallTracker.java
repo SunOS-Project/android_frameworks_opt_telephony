@@ -3435,10 +3435,15 @@ public class ImsPhoneCallTracker extends CallTracker implements ImsPullCall {
         conn.updateMediaCapabilities(imsCall);
         if (ignoreState) {
             conn.updateAddressDisplay(imsCall);
-            // Some devices will change the audio direction between major call state changes, so we
-            // need to check whether to start or stop ringback
-            conn.maybeChangeRingbackState();
 
+            boolean handleAudioDirectionChangesBetweenCallStateChanges =
+                SystemProperties.getBoolean(
+                    "ro.telephony.handle_audio_direction_changes_between_call_state_changes", true);
+            if (handleAudioDirectionChangesBetweenCallStateChanges) {
+                // Some devices will change the audio direction between major call state change,
+                // so we need to check whether to start or stop ringback
+                conn.maybeChangeRingbackState();
+            }
             maybeSetVideoCallProvider(conn, imsCall);
             // Update IMS call status if the call attributes are changed - i.e. call network type.
             mImsCallInfoTracker.updateImsCallStatus(conn);
