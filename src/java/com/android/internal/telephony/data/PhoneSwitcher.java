@@ -2155,6 +2155,11 @@ public class PhoneSwitcher extends Handler {
                     logl("onDdsSwitchResponse: Wait for SIM to get READY");
 // QTI_BEGIN: 2021-04-19: Telephony: Add support to retry for DDS switch failures
                     return;
+                } else if (error == CommandException.Error.RADIO_NOT_AVAILABLE) {
+                    logl("onDdsSwitchResponse: Falling back to HAL_COMMAND_ALLOW_DATA");
+                    mHalCommandToUse = HAL_COMMAND_ALLOW_DATA;
+                    sendRilCommands(phoneId);
+                    return;
                 }
             }
 // QTI_END: 2021-04-19: Telephony: Add support to retry for DDS switch failures
